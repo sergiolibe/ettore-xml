@@ -5,11 +5,13 @@ namespace Ettore\LinioApi\DTO;
 
 
 use Ettore\Serialization\XmlSerializable;
-use Ettore\Serialization\XmlUtils;
+use Ettore\Serialization\XmlSerializableTrait;
 use JsonSerializable;
 
 class Product implements JsonSerializable, XmlSerializable
 {
+    use XmlSerializableTrait;
+
     private ?string $sellerSku = null;
     private ?string $parentSku = null;
     private ?string $name = null;
@@ -37,22 +39,13 @@ class Product implements JsonSerializable, XmlSerializable
 
     public function xmlSerialize(bool $prettyXml = false): string
     {
-        $nl = $prettyXml ? PHP_EOL : '';
-        $xmlTag = 'Product';
-        $xmlContent = '';
+        $this->arrayRepresentation = $this->jsonSerialize();
+        return $this->xmlSerializeContent($prettyXml);
+    }
 
-        $arrayRepresentation = $this->jsonSerialize();
-
-        foreach ($arrayRepresentation as $property => $value) {
-            if ($value instanceof XmlSerializable)
-                $xmlContent .= $value->xmlSerialize($prettyXml);
-            else
-                $xmlContent .= XmlUtils::renderXml((string)$value, $property);
-
-            $xmlContent .= $nl;
-        }
-
-        return XmlUtils::renderXml($xmlContent, $xmlTag);
+    public function xmlTag(): string
+    {
+        return 'Product';
     }
 
     public static function builder(): ProductBuilder

@@ -7,4 +7,5 @@ namespace Ettore\Serialization;
 interface XmlSerializable
 {
     public function xmlSerialize(bool $prettyXml = false): string;
+    public function xmlTag(): string;
 }

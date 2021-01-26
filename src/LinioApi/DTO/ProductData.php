@@ -4,12 +4,14 @@ declare(strict_types=1);
 namespace Ettore\LinioApi\DTO;
 
 
-use JsonSerializable;
 use Ettore\Serialization\XmlSerializable;
-use Ettore\Serialization\XmlUtils;
+use Ettore\Serialization\XmlSerializableTrait;
+use JsonSerializable;
 
 class ProductData implements JsonSerializable, XmlSerializable
 {
+    use XmlSerializableTrait;
+
     private ?string $conditionType = null;
     private ?string $shortDescription = null;
     private ?int $packageWeight = null;
@@ -31,22 +33,13 @@ class ProductData implements JsonSerializable, XmlSerializable
 
     public function xmlSerialize(bool $prettyXml = false): string
     {
-        $nl = $prettyXml ? PHP_EOL : '';
-        $xmlTag = 'ProductData';
-        $xmlContent = '';
+        $this->arrayRepresentation = $this->jsonSerialize();
+        return $this->xmlSerializeContent($prettyXml);
+    }
 
-        $arrayRepresentation = $this->jsonSerialize();
-
-        foreach ($arrayRepresentation as $property => $value) {
-            if ($value instanceof XmlSerializable)
-                $xmlContent .= $value->xmlSerialize($prettyXml);
-            else
-                $xmlContent .= XmlUtils::renderXml((string)$value, $property);
-
-            $xmlContent .= $nl;
-        }
-
-        return XmlUtils::renderXml($xmlContent, $xmlTag);
+    public function xmlTag(): string
+    {
+        return 'ProductData';
     }
 
     public static function builder(): ProductDataBuilder
