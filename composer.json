@@ -1,0 +1,25 @@
+{
+  "name": "sergioliberati/test-ettore",
+  "authors": [
+    {
+      "name": "Sergio Liberati",
+      "email": "sergiolibe@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Ettore\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Ettore\\": "tests"
+    }
+  }
+}
