@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Ettore\Serialization;
 
 
+use JsonSerializable;
+
 trait XmlSerializableTrait
 {
     private array $arrayRepresentation;
@@ -15,7 +17,11 @@ trait XmlSerializableTrait
 
         $xmlContent = '';
 
-        foreach ($this->arrayRepresentation as $property => $value) {
+        $arrayRepresentation = $this instanceof JsonSerializable ?
+            $this->jsonSerialize() :
+            $this->arrayRepresentation;
+
+        foreach ($arrayRepresentation as $property => $value) {
             if ($value instanceof XmlSerializable)
                 $xmlContent .= $value->xmlSerialize($prettyXml);
             else
@@ -24,7 +30,10 @@ trait XmlSerializableTrait
             $xmlContent .= $nl;
         }
 
-        $xmlTag = $this instanceof XmlSerializable ? $this->xmlTag() : $this->xmlTag;
+        $xmlTag = $this instanceof XmlSerializable ?
+            $this->xmlTag() :
+            $this->xmlTag;
+
         return XmlUtils::renderXml($xmlContent, $xmlTag);
     }
 }

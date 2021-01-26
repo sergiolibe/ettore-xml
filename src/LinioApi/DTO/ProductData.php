@@ -33,7 +33,6 @@ class ProductData implements JsonSerializable, XmlSerializable
 
     public function xmlSerialize(bool $prettyXml = false): string
     {
-        $this->arrayRepresentation = $this->jsonSerialize();
         return $this->xmlSerializeContent($prettyXml);
     }
 
