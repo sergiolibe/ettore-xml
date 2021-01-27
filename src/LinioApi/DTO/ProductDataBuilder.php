@@ -5,12 +5,12 @@ namespace Ettore\LinioApi\DTO;
 
 
 /**
- * @method self conditionType(string $conditionType)
- * @method self shortDescription() shortDescription(string $shortDescription)
- * @method self packageWeight() packageWeight(int $packageWeight)
- * @method self packageWidth() packageWidth(int $packageWidth)
- * @method self packageLength() packageLength(int $packageLength)
- * @method self packageHeight() packageHeight(int $packageHeight)
+ * @method self conditionType(?string $conditionType)
+ * @method self shortDescription(?string $shortDescription)
+ * @method self packageWeight(?int $packageWeight)
+ * @method self packageWidth(?int $packageWidth)
+ * @method self packageLength(?int $packageLength)
+ * @method self packageHeight(?int $packageHeight)
  * @method ProductData build()
  */
 class ProductDataBuilder

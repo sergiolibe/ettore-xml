@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Ettore\LinioApi\DTO\Product;
+use Ettore\LinioApi\DTO\ProductBuilder;
 use Ettore\LinioApi\DTO\ProductData;
 
 include __DIR__ . '/../bootstrap.php';

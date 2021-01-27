@@ -4,23 +4,29 @@ declare(strict_types=1);
 namespace Ettore\LinioApi\DTO;
 
 
-use Ettore\Serialization\XmlSerializable;
-use Ettore\Serialization\XmlSerializableTrait;
-use JsonSerializable;
-
-class Product implements JsonSerializable, XmlSerializable
+/**
+ * @method void setSellerSku(?string $sellerSku)
+ * @method void setParentSku(?string $parentSku)
+ * @method void setName(?string $name)
+ * @method void setPrimaryCategory(?int $primaryCategory)
+ * @method void setDescription(?string $description)
+ * @method void setBrand(?string $brand)
+ * @method void setPrice(?float $price)
+ * @method void setProductId(?string $productId)
+ * @method void setProductData(?ProductData $productData)
+ * @method static ProductBuilder builder()
+ */
+class Product extends XmlEntity
 {
-    use XmlSerializableTrait;
-
-    private ?string $sellerSku = null;
-    private ?string $parentSku = null;
-    private ?string $name = null;
-    private ?int $primaryCategory = null;
-    private ?string $description = null;
-    private ?string $brand = null;
-    private ?float $price = null;
-    private ?string $productId = null;
-    private ?ProductData $productData = null;
+    protected ?string $sellerSku = null;
+    protected ?string $parentSku = null;
+    protected ?string $name = null;
+    protected ?int $primaryCategory = null;
+    protected ?string $description = null;
+    protected ?string $brand = null;
+    protected ?float $price = null;
+    protected ?string $productId = null;
+    protected ?ProductData $productData = null;
 
     public function jsonSerialize(): array
     {
@@ -35,67 +41,5 @@ class Product implements JsonSerializable, XmlSerializable
             "ProductId" => (string)$this->productId,
             "ProductData" => $this->productData,
         ];
-    }
-
-    public function xmlSerialize(bool $prettyXml = false): string
-    {
-        return $this->xmlSerializeContent($prettyXml);
-    }
-
-    public function xmlTag(): string
-    {
-        return 'Product';
-    }
-
-    public static function builder(): ProductBuilder
-    {
-        $builder = new ProductBuilder();
-        $builder->createInstance();
-        return $builder;
-    }
-
-    public function setSellerSku(string $sellerSku): void
-    {
-        $this->sellerSku = $sellerSku;
-    }
-
-    public function setParentSku(string $parentSku): void
-    {
-        $this->parentSku = $parentSku;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function setPrimaryCategory(int $primaryCategory): void
-    {
-        $this->primaryCategory = $primaryCategory;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function setBrand(string $brand): void
-    {
-        $this->brand = $brand;
-    }
-
-    public function setPrice(float $price): void
-    {
-        $this->price = $price;
-    }
-
-    public function setProductId(string $productId): void
-    {
-        $this->productId = $productId;
-    }
-
-    public function setProductData(?ProductData $productData): void
-    {
-        $this->productData = $productData;
     }
 }
