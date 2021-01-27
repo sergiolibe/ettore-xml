@@ -44,7 +44,7 @@ class ProductData implements JsonSerializable, XmlSerializable
     public static function builder(): ProductDataBuilder
     {
         $builder = new ProductDataBuilder();
-        $builder->createProductData();
+        $builder->createInstance();
         return $builder;
     }
 

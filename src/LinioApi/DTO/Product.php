@@ -50,7 +50,7 @@ class Product implements JsonSerializable, XmlSerializable
     public static function builder(): ProductBuilder
     {
         $builder = new ProductBuilder();
-        $builder->createProduct();
+        $builder->createInstance();
         return $builder;
     }
 

@@ -3,73 +3,25 @@ declare(strict_types=1);
 
 namespace Ettore\LinioApi\DTO;
 
-
+/**
+ * @method self sellerSku(string $sellerSku)
+ * @method self parentSku(string $parentSku)
+ * @method self name(string $name)
+ * @method self primaryCategory(int $primaryCategory)
+ * @method self description(string $description)
+ * @method self brand(string $brand)
+ * @method self price(float $price)
+ * @method self productId(string $productId)
+ * @method self productData(ProductData $productData)
+ * @method Product build()
+ */
 class ProductBuilder
 {
-    private Product $product;
+    use BuilderTrait;
 
-    public function createProduct(): self
+    public function createInstance(): self
     {
-        $this->product = new Product();
+        $this->instance = new Product();
         return $this;
-    }
-
-    public function sellerSku(string $sellerSku): self
-    {
-        $this->product->setSellerSku($sellerSku);
-        return $this;
-    }
-
-    public function parentSku(string $parentSku): self
-    {
-        $this->product->setParentSku($parentSku);
-        return $this;
-    }
-
-    public function name(string $name): self
-    {
-        $this->product->setName($name);
-        return $this;
-    }
-
-    public function primaryCategory(int $primaryCategory): self
-    {
-        $this->product->setPrimaryCategory($primaryCategory);
-        return $this;
-    }
-
-    public function description(string $description): self
-    {
-        $this->product->setDescription($description);
-        return $this;
-    }
-
-    public function brand(string $brand): self
-    {
-        $this->product->setBrand($brand);
-        return $this;
-    }
-
-    public function price(float $price): self
-    {
-        $this->product->setPrice($price);
-        return $this;
-    }
-
-    public function productId(string $productId): self
-    {
-        $this->product->setProductId($productId);
-        return $this;
-    }
-
-    public function productData(ProductData $productData): self
-    {
-        $this->product->setProductData($productData);
-        return $this;
-    }
-
-    public function build(): Product
-    {
-        return $this->product;
     }
 }
